@@ -1,0 +1,7 @@
+dist/
+node_modules/
+
+
+python/data/**
+python/__pycache__/**
+discord-bot.code-workspace

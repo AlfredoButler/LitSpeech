@@ -27,6 +27,7 @@ from text_transform import TextTransform
 # TODO: training_step()
 # TODO: validation_step()
 # TODO: test_step()
+BATCH_SIZE = 100
 
 class LitSpeech(pl.LightningModule):
     def __init__(self, *args, **kwargs):
@@ -38,7 +39,7 @@ class LitSpeech(pl.LightningModule):
 
         # Hard-coded globals    
         self.DATA_DIR = os.path.join('data')
-        self.BATCH_SIZE = 100
+        self.BATCH_SIZE = BATCH_SIZE
         self.loss_fn = nn.CTCLoss(blank=28) # loss function
 
         # Hyperparameters
@@ -98,9 +99,33 @@ class LitSpeech(pl.LightningModule):
         optimizer = torch.optim.AdamW(self.parameters(), self.lr)
         return optimizer
 
+
     # ----------------------------------
-    # Data preparation hooks
+    # Training, validation, and test steps
     # ----------------------------------
+
+    def training_step(self, batch, batch_idx):
+        spectrograms, targets, input_lengths, target_lengths = batch
+        spectrograms = spectrograms.to(self.device)
+        targets = targets.to(self.device)
+        # TODO
+
+    def validation_step(self, batch, batch_idx, val: bool = True):
+        # TODO
+        pass 
+
+    def test_step(self, batch, batch_idx):
+        return self.validation_step(batch, batch_idx, val = False)
+
+class LitSpeechDataModule(pl.LightningDataModule):
+    """Data preparation hooks for LitSpeech
+
+    Args:
+        pl ([type]): [description]
+    """
+    def __init__(self):
+        self.batch_size = BATCH_SIZE 
+
     def prepare_data(self) -> None:
         self.train_dataset = torchaudio.datasets.LIBRISPEECH(
             root = self.DATA_DIR, 
@@ -142,14 +167,6 @@ class LitSpeech(pl.LightningModule):
         return self.get_dataloader("val")
     def test_dataloader(self) -> torch.utils.data.DataLoader:
         return self.get_dataloader("test")
-    
-    # ----------------------------------
-    # Training, validation, and test steps
-    # ----------------------------------
-
-    def training_step(self, batch, batch_idx):
-        spectrograms, targets, input_lengths, target_lengths = batch
-        spectrograms, targets = t.o        
 
 
 # %%

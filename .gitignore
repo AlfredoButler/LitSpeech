@@ -6,8 +6,6 @@ python/data/**
 python/__pycache__/**
 discord-bot.code-workspace
 
-notes/**
-
 # Jupyter checkpoints
 **checkpoint.ipyn**
 **checkpoint.ipy**

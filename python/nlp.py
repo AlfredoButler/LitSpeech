@@ -27,13 +27,14 @@ from text_transform import TextTransform
 # TODO: training_step()
 # TODO: validation_step()
 # TODO: test_step()
+
 BATCH_SIZE = 100
 
 class LitSpeech(pl.LightningModule):
     def __init__(self, *args, **kwargs):
         """[summary]
         """
-        super(LitSpeech).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         torch.manual_seed(42)
 
@@ -120,8 +121,12 @@ class LitSpeech(pl.LightningModule):
 class LitSpeechDataModule(pl.LightningDataModule):
     """Data preparation hooks for LitSpeech
 
-    Args:
-        pl ([type]): [description]
+    Attributes:
+        batch_size (int): 
+    Methods: 
+        prepare_data:
+        setup(stage: Optional[str] = None):
+
     """
     def __init__(self):
         self.batch_size = BATCH_SIZE 

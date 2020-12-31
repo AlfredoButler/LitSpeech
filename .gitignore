@@ -4,7 +4,7 @@ node_modules/
 
 python/data/**
 python/__pycache__/**
-discord-bot.code-workspace
+lit_speech.code-workspace
 
 # Jupyter checkpoints
 **checkpoint.ipyn**

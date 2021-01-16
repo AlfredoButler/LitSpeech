@@ -13,7 +13,6 @@ class CNNLayerNorm(nn.Module):
         x = self.layer_norm(x)
         return x.transpose(2, 3).contiguous() # (batch, channel, feature, time) 
 
-
 class ResidualCNN(nn.Module):
     """Residual CNN inspired by https://arxiv.org/pdf/1603.05027.pdf
         except with layer norm instead of batch norm
@@ -40,7 +39,6 @@ class ResidualCNN(nn.Module):
         x = self.cnn2(x)
         x += residual
         return x # (batch, channel, feature, time)
-
 
 class BidirectionalGRU(nn.Module):
 

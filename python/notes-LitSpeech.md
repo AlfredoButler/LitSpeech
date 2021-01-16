@@ -1,7 +1,5 @@
 # Lit Speech Notes
 
-
-
 author: Unique Divine  
 date: December '20 - January '21
 
